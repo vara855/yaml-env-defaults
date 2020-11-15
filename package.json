@@ -11,7 +11,9 @@
   "scripts": {
     "test": "jest",
     "compile": "tsc",
-    "lint": "eslint"
+    "lint": "eslint",
+    "version": "npm run lint && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "files": [
     "lib/**/*"

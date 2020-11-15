@@ -1,0 +1,13 @@
+foo: 1
+bar: 'text-${ENV_VAR_MY}-text-${ENV_VAR_YOUR}-text'
+
+someFoo:
+  someBar: ['${ENV_VAR_MY}', '${ENV_VAR_YOUR}']
+  yaml-array:
+    - ${ENV_VAR_MY}
+    - second
+
+someStrange: Thats/${ENV_VAR_MY}/${NAMESPACE:cloud-or-not}/${ENV_VAR_YOUR}
+
+escapedValue:
+  value: \$\{ENV_VAR_MY\}

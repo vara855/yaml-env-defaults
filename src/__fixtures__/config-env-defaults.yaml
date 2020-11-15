@@ -1,0 +1,6 @@
+some:
+  params:
+    test: ${UNKNOWN:default value}
+    boolean: ${BOOLEAN:false}
+    number: ${NUMBER:1234}
+    long: ${LONG:12.3}

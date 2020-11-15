@@ -1,0 +1,16 @@
+app:
+  trueValue: true
+  falseValue: false
+  text: 'some text'
+  obj: { val: 3 }
+  arr: [1]
+  empty_obj: {}
+  empty_arr: []
+  yaml-array:
+    - first
+    - second
+    - third
+obj: { val: 3 }
+arr: [1, 2]
+empty_obj: {}
+empty_arr: []

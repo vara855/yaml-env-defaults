@@ -1,0 +1,6 @@
+app.boolean: true
+app.text: 'some text'
+app.object: { val: 3 }
+app.array: [1, 2]
+app.empty-object: {}
+app.empty-array: []

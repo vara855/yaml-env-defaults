@@ -1,5 +1,5 @@
 {
-  "name": "yaml-env",
+  "name": "yaml-env-defaults",
   "version": "1.0.0",
   "description": "Read yaml file with environment variables substitution",
   "main": "lib/index.js",

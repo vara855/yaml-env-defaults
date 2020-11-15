@@ -11,7 +11,7 @@
 ## Install
 
 ```sh
-npm install yaml-env
+npm install yaml-env-defaults
 ```
 
 ## Author

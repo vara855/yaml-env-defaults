@@ -11,7 +11,7 @@
   "scripts": {
     "test": "jest",
     "compile": "tsc",
-    "lint": "eslint",
+    "lint": "eslint ./src/*.ts --quiet",
     "version": "npm run lint && git add -A src",
     "postversion": "git push && git push --tags"
   },

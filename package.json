@@ -1,6 +1,6 @@
 {
   "name": "yaml-env-defaults",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Read yaml file with environment variables substitution",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

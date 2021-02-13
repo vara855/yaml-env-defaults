@@ -2,3 +2,4 @@ src
 tsconfig.json
 .eslintrc.js
 jest.config.js
+.github

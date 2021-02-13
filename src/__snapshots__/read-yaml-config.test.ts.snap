@@ -42,6 +42,174 @@ Object {
 }
 `;
 
+exports[`read yaml config with env replacing .readYamlEnv() with custom env object should read config with customEnvs when process.env is empty 1`] = `
+Object {
+  "bar": "text-Some value 2-text-Another Value-text",
+  "escapedValue": Object {
+    "value": "\\\\$\\\\{ENV_VAR_MY\\\\}",
+  },
+  "foo": 1,
+  "someFoo": Object {
+    "someBar": Array [
+      "Some value 2",
+      "Another Value",
+    ],
+    "yaml-array": Array [
+      "Some value 2",
+      "second",
+    ],
+  },
+  "someStrange": "Thats/Some value 2/cloud-or-not/Another Value",
+}
+`;
+
+exports[`read yaml config with env replacing .readYamlEnv() with custom env object should replace to custom env value instead of process.env value 1`] = `
+Object {
+  "bar": "text-CUSTOM_ENV-text-Another Value-text",
+  "escapedValue": Object {
+    "value": "\\\\$\\\\{ENV_VAR_MY\\\\}",
+  },
+  "foo": 1,
+  "someFoo": Object {
+    "someBar": Array [
+      "CUSTOM_ENV",
+      "Another Value",
+    ],
+    "yaml-array": Array [
+      "CUSTOM_ENV",
+      "second",
+    ],
+  },
+  "someStrange": "Thats/CUSTOM_ENV/cloud-or-not/Another Value",
+}
+`;
+
+exports[`read yaml config with env replacing merges two yaml config files 1`] = `
+Object {
+  "app": Object {
+    "arr": Array [
+      1,
+    ],
+    "array": Array [
+      1,
+      2,
+    ],
+    "boolean": true,
+    "empty-array": Array [],
+    "empty-object": Object {},
+    "empty_arr": Array [],
+    "empty_obj": Object {},
+    "falseValue": false,
+    "obj": Object {
+      "val": 3,
+    },
+    "object": Object {
+      "val": 3,
+    },
+    "text": "some text",
+    "trueValue": true,
+    "yaml-array": Array [
+      "first",
+      "second",
+      "third",
+    ],
+  },
+  "arr": Array [
+    1,
+    2,
+  ],
+  "empty_arr": Array [],
+  "empty_obj": Object {},
+  "obj": Object {
+    "val": 3,
+  },
+}
+`;
+
+exports[`read yaml config with env replacing reads single yaml from file system and parses to json 1`] = `
+Object {
+  "app": Object {
+    "arr": Array [
+      1,
+    ],
+    "empty_arr": Array [],
+    "empty_obj": Object {},
+    "falseValue": false,
+    "obj": Object {
+      "val": 3,
+    },
+    "text": "some text",
+    "trueValue": true,
+    "yaml-array": Array [
+      "first",
+      "second",
+      "third",
+    ],
+  },
+  "arr": Array [
+    1,
+    2,
+  ],
+  "empty_arr": Array [],
+  "empty_obj": Object {},
+  "obj": Object {
+    "val": 3,
+  },
+}
+`;
+
+exports[`read yaml config with env replacing returns a deep object from flat yaml file 1`] = `
+Object {
+  "app": Object {
+    "array": Array [
+      1,
+      2,
+    ],
+    "boolean": true,
+    "empty-array": Array [],
+    "empty-object": Object {},
+    "object": Object {
+      "val": 3,
+    },
+    "text": "some text",
+  },
+}
+`;
+
+exports[`read yaml config with env replacing should inject an environment variable value when setting a value with \${ENV_VAR} 1`] = `
+Object {
+  "bar": "text-Some value 1-text-Another Value 2-text",
+  "escapedValue": Object {
+    "value": "\\\\$\\\\{ENV_VAR_MY\\\\}",
+  },
+  "foo": 1,
+  "someFoo": Object {
+    "someBar": Array [
+      "Some value 1",
+      "Another Value 2",
+    ],
+    "yaml-array": Array [
+      "Some value 1",
+      "second",
+    ],
+  },
+  "someStrange": "Thats/Some value 1/cloud-or-not/Another Value 2",
+}
+`;
+
+exports[`read yaml config with env replacing should read config with defaults env values 1`] = `
+Object {
+  "some": Object {
+    "params": Object {
+      "boolean": "false",
+      "long": "12.3",
+      "number": "1234",
+      "test": "default value",
+    },
+  },
+}
+`;
+
 exports[`reads single yaml from file system and parses to json 1`] = `
 Object {
   "app": Object {

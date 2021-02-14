@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "compile": "tsc",
     "lint": "eslint ./src/*.ts --quiet",
     "version": "npm run lint && git add -A src",

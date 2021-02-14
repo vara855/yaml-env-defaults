@@ -1,1 +1,1 @@
-export { readYamlEnv } from './read-yaml-config';
+export { readYamlEnvSync, readYamlEnv } from './read-yaml-config';

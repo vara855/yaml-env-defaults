@@ -173,3 +173,13 @@ describe('.readYamlEnv() async', () => {
   });
 });
 
+
+test('should parse simple yaml', () => {
+  process.env.TEST = 'my var';
+  expect(
+    readYamlEnvSync(getFixtureFile('./simple.yaml'))
+  ).toStrictEqual({
+    test: 'my var'
+  });
+});
+

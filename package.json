@@ -31,12 +31,12 @@
   "author": "Valerii Nosikov",
   "license": "MIT",
   "dependencies": {
-    "js-yaml": "^3.14.0",
-    "lodash": "^4.17.20"
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
-    "@types/js-yaml": "^3.12.5",
+    "@types/js-yaml": "^4.0.5",
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.11.2",
     "@typescript-eslint/eslint-plugin": "^5.35.1",

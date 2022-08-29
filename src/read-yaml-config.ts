@@ -1,4 +1,4 @@
-import { LoadOptions, safeLoad, } from 'js-yaml';
+import { LoadOptions, load } from 'js-yaml';
 import { set, isPlainObject } from 'lodash';
 import { readFileSync, promises } from 'fs';
 
@@ -86,13 +86,13 @@ export const readYamlEnvSync = <T extends Record<string, any>>(filePath: string 
   let replacedYaml = {};
   if (Array.isArray(filePath)) {
     for (const file of filePath) {
-      const yaml = safeLoad(readFileSync(file, 'utf-8'), options?.jsYaml);
+      const yaml = load(readFileSync(file, 'utf-8'), options?.jsYaml);
       if (yaml) {
         replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
       }
     }
   } else {
-    const yaml = safeLoad(readFileSync(filePath, 'utf-8'));
+    const yaml = load(readFileSync(filePath, 'utf-8'));
     if (yaml) {
       replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
     }
@@ -112,14 +112,14 @@ export const readYamlEnv = async <T extends Record<string, any>>(filePath: strin
   if (Array.isArray(filePath)) {
     for (const file of filePath) {
       const _file = await readFile(file, 'utf-8');
-      const yaml = safeLoad(_file, options?.jsYaml);
+      const yaml = load(_file, options?.jsYaml);
       if (yaml) {
         replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
       }
     }
   } else {
     const _file = await readFile(filePath, 'utf-8');
-    const yaml = safeLoad(_file, options?.jsYaml);
+    const yaml = load(_file, options?.jsYaml);
     if (yaml) {
       replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
     }

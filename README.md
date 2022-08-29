@@ -1,6 +1,6 @@
 <h1>Welcome to yaml-env-defaults 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.1.3-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
@@ -134,8 +134,8 @@ All files            |   98.46 |    83.02 |     100 |   98.11 |
 
 ## Used Dependencies: 
 
-- js-yaml
-- lodash
+- js-yaml@4.1.0
+- lodash@4.17.21
 
 ## Author
 

@@ -104,7 +104,7 @@ export const readYamlEnvSync = <T extends Record<string, any>>(filePath: string 
  * Replace env refs in yaml to values async
  * @param {string | string[]} filePath path to yaml file
  * @param {{ jsyaml: LoadOptions }} options options
- * @param {Object<*>} customEnv custom environment object
+ * @param {Record<string, any> | EnvVarResolver} customEnv custom environment object
  * @returns {Promise<Record<string, any>>}
  */
 export const readYamlEnv = async <T extends Record<string, any>>(filePath: string | string[], customEnv?: EnvVariables, options?: readYamlOptions): Promise<T> => {

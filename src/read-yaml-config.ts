@@ -80,19 +80,20 @@ function processYaml(
  * @param {string | string[]} filePath path to yaml file
  * @param {{ jsyaml: LoadOptions }} options options
  * @param {Object<*>} customEnv custom environment object
+ * @param {BufferEncoding | undefined} encoding file encoding
  * @returns {Record<string, any>}
  */
-export const readYamlEnvSync = <T extends Record<string, any>>(filePath: string | string[], customEnv?: EnvVariables, options?: readYamlOptions): T => {
+export const readYamlEnvSync = <T extends Record<string, any>>(filePath: string | string[], customEnv?: EnvVariables, options?: readYamlOptions, encoding = 'utf-8'): T => {
   let replacedYaml = {};
   if (Array.isArray(filePath)) {
     for (const file of filePath) {
-      const yaml = load(readFileSync(file, 'utf-8'), options?.jsYaml);
+      const yaml = load(readFileSync(file, encoding as BufferEncoding), options?.jsYaml);
       if (yaml) {
         replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
       }
     }
   } else {
-    const yaml = load(readFileSync(filePath, 'utf-8'));
+    const yaml = load(readFileSync(filePath, encoding as BufferEncoding));
     if (yaml) {
       replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
     }
@@ -105,20 +106,21 @@ export const readYamlEnvSync = <T extends Record<string, any>>(filePath: string 
  * @param {string | string[]} filePath path to yaml file
  * @param {{ jsyaml: LoadOptions }} options options
  * @param {Record<string, any> | EnvVarResolver} customEnv custom environment object
+ * @param {BufferEncoding | undefined} encoding file encoding
  * @returns {Promise<Record<string, any>>}
  */
-export const readYamlEnv = async <T extends Record<string, any>>(filePath: string | string[], customEnv?: EnvVariables, options?: readYamlOptions): Promise<T> => {
+export const readYamlEnv = async <T extends Record<string, any>>(filePath: string | string[], customEnv?: EnvVariables, options?: readYamlOptions, encoding = 'utf-8'): Promise<T> => {
   let replacedYaml = {};
   if (Array.isArray(filePath)) {
     for (const file of filePath) {
-      const _file = await readFile(file, 'utf-8');
+      const _file = await readFile(file, encoding as BufferEncoding);
       const yaml = load(_file, options?.jsYaml);
       if (yaml) {
         replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
       }
     }
   } else {
-    const _file = await readFile(filePath, 'utf-8');
+    const _file = await readFile(filePath, encoding as BufferEncoding);
     const yaml = load(_file, options?.jsYaml);
     if (yaml) {
       replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);

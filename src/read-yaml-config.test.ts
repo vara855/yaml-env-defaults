@@ -4,6 +4,12 @@ import { readYamlEnv, readYamlEnvSync } from './read-yaml-config';
 const getFixtureFile = (name: string) => resolve(__dirname, '__fixtures__', name);
 
 describe('readYamlEnvSync()', () => {
+
+  test('should not fail if specified incorrect encoding', () => {
+    const result = readYamlEnvSync(getFixtureFile('config.yml'), undefined, undefined, 'base64');
+    expect(result).toMatchSnapshot();
+  });
+
   test('reads single yaml from file system and parses to json', () => {
     const config = readYamlEnvSync(getFixtureFile('config.yml'));
 
@@ -86,6 +92,11 @@ describe('readYamlEnvSync()', () => {
 });
 
 describe('.readYamlEnv() async', () => {
+
+  test('should not fail if specified incorrect encoding', async () => {
+    const result = await readYamlEnv(getFixtureFile('config.yml'), undefined, undefined, 'base64');
+    expect(result).toMatchSnapshot();
+  });
 
   test('reads single yaml from file system and parses to json', async () => {
     const config = await readYamlEnv(getFixtureFile('config.yml'));

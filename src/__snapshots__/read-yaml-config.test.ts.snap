@@ -155,6 +155,8 @@ Object {
 }
 `;
 
+exports[`.readYamlEnv() async should not fail if specified incorrect encoding 1`] = `Object {}`;
+
 exports[`.readYamlEnv() async should read config with defaults env values 1`] = `
 Object {
   "some": Object {
@@ -322,6 +324,8 @@ Object {
   "someStrange": "Thats/Some value 1/cloud-or-not/Another Value 2",
 }
 `;
+
+exports[`readYamlEnvSync() should not fail if specified incorrect encoding 1`] = `Object {}`;
 
 exports[`readYamlEnvSync() should read config with defaults env values 1`] = `
 Object {

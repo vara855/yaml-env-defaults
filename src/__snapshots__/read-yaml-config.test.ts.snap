@@ -335,3 +335,11 @@ Object {
   },
 }
 `;
+
+exports[`should correctly parse config2.yml 1`] = `
+Object {
+  "test": Object {
+    "value": "some-config2.yml value-default with spaces-config2.yml-var3",
+  },
+}
+`;

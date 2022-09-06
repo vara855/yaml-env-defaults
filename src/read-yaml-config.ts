@@ -33,18 +33,13 @@ function replaceEnvVarRefsWithDefaults(val: string, customEnv?: EnvVariables) {
     );
   });
   return foundValue.replace(
-    /(.*)\${(\w+):(.*)}(.*)/g,
-    (match: string, prefix, envVarName, defValue, postfix) => {
-      const envValue = process.env[envVarName];
+    /\${(\w+):(.+?)}/g,
+    (match: string, envVarName, defValue) => {
+      const envValue: any = process.env[envVarName];
       if (envValue !== undefined) {
-        return `${prefix}${envValue.trim()}${postfix}`;
-      } else {
-        if (prefix || postfix) {
-          return transformIfJSON(`${prefix}${transformIfJSON(defValue)}${postfix}`);
-        } else {
-          return transformIfJSON(defValue);
-        }
+        return transformIfJSON(envValue);
       }
+      return transformIfJSON(defValue);
     }
   );
 }

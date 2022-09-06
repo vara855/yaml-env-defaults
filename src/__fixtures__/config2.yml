@@ -1,0 +1,3 @@
+---
+test:
+  value: 'some-${ENV_VAR_MY}-${ENV_VAR_MY2:default with spaces}-${ENV_VAR_YOUR}-${ENV_VAR_MY3:var3}'

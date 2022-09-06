@@ -17,7 +17,7 @@ npm install yaml-env-defaults
 
 # or
 
-yarn add yaml-evn-defaults
+yarn add yaml-env-defaults
 ```
 
 ## Usage

@@ -8,7 +8,7 @@ export type EnvVariables = Record<string, any> | EnvVarResolver;
 
 export interface readYamlOptions {
   jsYaml?: LoadOptions,
-};
+}
 
 function replaceEnvVarRefsWithDefaults(val: string, customEnv?: EnvVariables) {
   const foundValue = val.replace(/\$\{(\w+)\}/g, (substring, envVarName) => {

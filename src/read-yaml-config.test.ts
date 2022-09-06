@@ -194,3 +194,17 @@ test('should parse simple yaml', () => {
   });
 });
 
+test('couple defaults in one yaml field', () => {
+  expect(readYamlEnvSync(getFixtureFile('./couple-defaults.yaml')))
+    .toStrictEqual({
+      mysql: {
+        url: 'mysql://root:password@localhost:3306/feedback_1'
+      }
+    });
+});
+
+test('should correctly parse config2.yml', () => {
+  process.env.ENV_VAR_YOUR = 'config2.yml';
+  process.env.ENV_VAR_MY = 'config2.yml value';
+  expect(readYamlEnvSync(getFixtureFile('config2.yml'))).toMatchSnapshot();
+});

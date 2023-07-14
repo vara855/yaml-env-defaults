@@ -200,6 +200,16 @@ describe(".readYamlEnv() async", () => {
           readYamlEnv([getFixtureFile("./config-env.yml")], () => null)
         ).resolves.toBeDefined();
       });
+
+      test("should replace to null when resolver returns null", async () => {
+        await expect(
+          readYamlEnv(getFixtureFile("./config-with-missed.yaml"), () => null)
+        ).resolves.toStrictEqual({
+          doc: {
+            "missed-val": null,
+          },
+        });
+      });
     });
   });
 });

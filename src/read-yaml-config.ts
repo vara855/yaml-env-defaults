@@ -38,6 +38,10 @@ function replaceEnvVarRefsWithDefaults(val: string, customEnv?: EnvVariables) {
 
     return envVarValue;
   });
+
+  if (foundValue === "null") {
+    return null;
+  }
   return foundValue.replace(
     /\${(\w+):(.+?)}/g,
     (match: string, envVarName, defValue) => {

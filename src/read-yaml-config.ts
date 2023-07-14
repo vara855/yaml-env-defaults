@@ -1,36 +1,42 @@
-import { LoadOptions, load } from 'js-yaml';
-import { set, isPlainObject } from 'lodash';
-import { readFileSync, promises } from 'fs';
+import { LoadOptions, load } from "js-yaml";
+import { set, isPlainObject } from "lodash";
+import { readFileSync, promises } from "fs";
 
 const { readFile } = promises;
 export type EnvVarResolver = (key: string) => any;
 export type EnvVariables = Record<string, any> | EnvVarResolver;
 
 export interface readYamlOptions {
-  jsYaml?: LoadOptions,
+  jsYaml?: LoadOptions;
+}
+export interface ReadYamlOptions {
+  jsYaml?: LoadOptions;
 }
 
 function replaceEnvVarRefsWithDefaults(val: string, customEnv?: EnvVariables) {
   const foundValue = val.replace(/\$\{(\w+)\}/g, (substring, envVarName) => {
     let envVarValue = undefined;
-    if (typeof customEnv === 'function') {
-
-      envVarValue = customEnv(envVarName) || process.env[envVarName];
+    if (typeof customEnv === "function") {
+      const provided = customEnv(envVarName);
+      envVarValue = provided === undefined ? process.env[envVarName] : provided;
     } else {
-      const mergedValues = customEnv ? {
-        ...process.env,
-        ...customEnv
-      } : process.env;
+      const mergedValues = customEnv
+        ? {
+            ...process.env,
+            ...customEnv,
+          }
+        : process.env;
 
       envVarValue = mergedValues[envVarName];
     }
 
-    if (envVarValue !== undefined) {
-      return envVarValue;
+    if (envVarValue === undefined) {
+      throw new Error(
+        `Unknown environment variable referenced in config: ${envVarName}. Specify environment variable or use defaults syntax.`
+      );
     }
-    throw new Error(
-      `Unknown environment variable referenced in config: ${envVarName}. Specify environment variable or use defaults syntax.`
-    );
+
+    return envVarValue;
   });
   return foundValue.replace(
     /\${(\w+):(.+?)}/g,
@@ -56,19 +62,32 @@ function processYaml(
   target: Record<string, any>,
   value: any,
   key?: string,
-  envVariables?: EnvVariables,
+  envVariables?: EnvVariables
 ): Record<string, any> {
-  if ((isPlainObject(value) || Array.isArray(value)) && Object.keys(value).length > 0) {
+  if (
+    (isPlainObject(value) || Array.isArray(value)) &&
+    Object.keys(value).length > 0
+  ) {
     for (const [subKey, subVal] of Object.entries(value)) {
-      processYaml(target, subVal, key ? `${key}.${subKey}` : subKey, envVariables);
+      processYaml(
+        target,
+        subVal,
+        key ? `${key}.${subKey}` : subKey,
+        envVariables
+      );
     }
   } else if (key !== undefined) {
-    set(target, key, typeof value === 'string' ? replaceEnvVarRefsWithDefaults(value, envVariables) : value);
+    set(
+      target,
+      key,
+      typeof value === "string"
+        ? replaceEnvVarRefsWithDefaults(value, envVariables)
+        : value
+    );
   }
 
   return target;
 }
-
 
 /**
  * Replace env refs in yaml to values
@@ -78,11 +97,19 @@ function processYaml(
  * @param {BufferEncoding | undefined} encoding file encoding
  * @returns {Record<string, any>}
  */
-export const readYamlEnvSync = <T extends Record<string, any>>(filePath: string | string[], customEnv?: EnvVariables, options?: readYamlOptions, encoding = 'utf-8'): T => {
+export const readYamlEnvSync = <T extends Record<string, any>>(
+  filePath: string | string[],
+  customEnv?: EnvVariables,
+  options?: ReadYamlOptions,
+  encoding = "utf-8"
+): T => {
   let replacedYaml = {};
   if (Array.isArray(filePath)) {
     for (const file of filePath) {
-      const yaml = load(readFileSync(file, encoding as BufferEncoding), options?.jsYaml);
+      const yaml = load(
+        readFileSync(file, encoding as BufferEncoding),
+        options?.jsYaml
+      );
       if (yaml) {
         replacedYaml = processYaml(replacedYaml, yaml, undefined, customEnv);
       }
@@ -104,7 +131,12 @@ export const readYamlEnvSync = <T extends Record<string, any>>(filePath: string 
  * @param {BufferEncoding | undefined} encoding file encoding
  * @returns {Promise<Record<string, any>>}
  */
-export const readYamlEnv = async <T extends Record<string, any>>(filePath: string | string[], customEnv?: EnvVariables, options?: readYamlOptions, encoding = 'utf-8'): Promise<T> => {
+export const readYamlEnv = async <T extends Record<string, any>>(
+  filePath: string | string[],
+  customEnv?: EnvVariables,
+  options?: ReadYamlOptions,
+  encoding = "utf-8"
+): Promise<T> => {
   let replacedYaml = {};
   if (Array.isArray(filePath)) {
     for (const file of filePath) {
